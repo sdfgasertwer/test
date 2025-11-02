@@ -3,192 +3,609 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Почему мы?</title>
+    <title>Почему выбирают нас? | Ювелирная мастерская</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
-        
-        body {
+        * {
             margin: 0;
             padding: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f8f8f8;
+            box-sizing: border-box;
         }
-        
-        .main-title {
-            text-align: center;
-            font-family: 'Playfair Display', serif;
-            font-size: 45px;
-            margin: 40px 0;
-            color: #ffffff;
+
+        :root {
+            --primary: #8B7355;
+            --secondary: #D4AF37;
+            --dark: #1a1a1a;
+            --light: #f8f8f8;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
         .container {
-            display: flex;
-            justify-content: space-between;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 0 20px;
         }
-        
-        .card {
-            flex: 1;
-            margin: 0px;
-            padding: 30px;
-            border-radius: 0px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+
+        /* Header Styles */
+        header {
+            padding: 30px 0;
             text-align: center;
             position: relative;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--secondary);
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .main-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            margin: 20px 0;
+            color: var(--light);
+            position: relative;
+            display: inline-block;
+        }
+
+        .main-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--secondary);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            color: #ccc;
+        }
+
+        /* Cards Section */
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 40px 0;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
             overflow: hidden;
-            min-height: 400px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: var(--transition);
+            position: relative;
+            height: 400px;
+            display: flex;
             flex-direction: column;
-            justify-content: center;
-            transition: all 0.3s ease-in-out;
+            justify-content: flex-end;
         }
 
         .card:hover {
-            flex: 1;
-            margin: 0px;
-            padding: 10px;
-            border-radius: 20px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.555);
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            min-height: 400px;
-            flex-direction: column;
-            justify-content: center;
-            margin: 20px;
+            transform: translateY(-15px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
         }
-        
-        /* Стиль для карточки с фоном */
-        .card-with-bg {
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
-        
-        .card-with-bg::before {
-            content: '';
+
+        .card-bg {
             position: absolute;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.664);
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: var(--transition);
             z-index: 1;
-            transition: all 0.4s ease-in-out;
         }
 
-        .card:hover.card-with-bg::before {
-            background: rgba(0, 0, 0, 0.4);
+        .card:hover .card-bg {
+            transform: scale(1.1);
         }
-        
+
+        .card-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.8) 100%);
+            z-index: 2;
+        }
+
         .card-content {
             position: relative;
-            z-index: 2;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: center;
-            height: 100%;
-            padding-top: 60px; /* Общее выравнивание для всех карточек */
-        }
-        
-        .card-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 32px;
-            margin-bottom: 30px;
+            z-index: 3;
+            padding: 30px;
             color: white;
-            width: 100%;
-            transition: all 0.4s ease-in-out;
-            min-height: 80px; /* Фиксированная высота для заголовков */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .card-text {
-            font-size: 22px;
-            line-height: 1.4;
-            color: white;
-            margin: 0;
-            width: 100%;
-            transition: all 0.4s ease-in-out;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-grow: 1; /* Занимает доступное пространство */
         }
 
-        /* Индивидуальные корректировки для выравнивания */
-        .quality-card .card-content {
-            padding-top: 60px;
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--secondary);
         }
-        
-        .exclusive-card .card-content {
-            padding-top: 80px; /* Немного выше для компенсации короткого текста */
-        }
-        
-        .love-card .card-content {
-            padding-top: 60px;
-        }
-        
-        .exclusive-section {
-            display: flex;
-            flex-direction: column;
-            flex: 1;
-        }
-        
-        .exclusive-title-wrapper {
-            background-color: #333333;
+
+        .card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
             color: white;
-            padding: 20px;
+        }
+
+        .card-text {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .card-btn {
+            display: inline-block;
+            padding: 10px 25px;
+            background: transparent;
+            border: 2px solid var(--secondary);
+            color: var(--secondary);
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .card-btn:hover {
+            background: var(--secondary);
+            color: var(--dark);
+        }
+
+        /* Specific Card Backgrounds */
+        .quality-card .card-bg {
+            background-image: url('https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80');
+        }
+
+        .exclusive-card .card-bg {
+            background-image: url('https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80');
+        }
+
+        .love-card .card-bg {
+            background-image: url('https://images.unsplash.com/photo-1605100804763-247f67b3557e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80');
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            padding: 80px 0;
             text-align: center;
         }
-        
-        .exclusive-main-title {
+
+        .section-title {
             font-family: 'Playfair Display', serif;
-            font-size: 45px;
-            margin: 0;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
             color: white;
+            position: relative;
+            display: inline-block;
         }
-        
-        /* Конкретные фоны для каждой карточки */
-        .quality-card {
-            background-image: url('https://ir.ozone.ru/s3/multimedia-1-1/wc1000/7217048701.jpg');
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--secondary);
         }
-        
-        .exclusive-card {
-            background-image: url('https://ae04.alicdn.com/kf/H8a836212256e40aeb8d76db46ba0ee08D.jpg');
+
+        .testimonials-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
         }
-        
-        .love-card {
-            background-image: url('https://ae04.alicdn.com/kf/Sebd761adfdad4f958824adf48bc12679O.jpg');
+
+        .testimonial {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: var(--transition);
+        }
+
+        .testimonial:hover {
+            transform: translateY(-10px);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .testimonial-text::before {
+            content: """;
+            font-size: 4rem;
+            color: var(--secondary);
+            position: absolute;
+            top: -20px;
+            left: -10px;
+            opacity: 0.3;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--secondary);
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--dark);
+        }
+
+        .author-info h4 {
+            margin-bottom: 5px;
+        }
+
+        .author-info p {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 80px 0;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 30px;
+            margin: 40px 0;
+        }
+
+        .cta-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .cta-text {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background: var(--secondary);
+            color: var(--dark);
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .cta-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            padding: 50px 0 30px;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--secondary);
+            margin-bottom: 20px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: var(--transition);
+        }
+
+        .social-icons a:hover {
+            background: var(--secondary);
+            color: var(--dark);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .main-title {
+                font-size: 2.8rem;
+            }
+            
+            .card-title {
+                font-size: 1.6rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2.3rem;
+            }
+            
+            .cards-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .card {
+                height: 350px;
+            }
+            
+            .testimonials-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .main-title {
+                font-size: 2rem;
+            }
+            
+            .card-content {
+                padding: 20px;
+            }
+            
+            .card-title {
+                font-size: 1.4rem;
+            }
+            
+            .card-text {
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .cta-title {
+                font-size: 2rem;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+
+        .delay-3 {
+            animation-delay: 0.6s;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="card card-with-bg quality-card">
-            <div class="card-content">
-                <h2 class="card-title">Качество и внимание к деталям</h2>
-                <p class="card-text">Мы тщательно отбираем каждый камень и проверяем каждую деталь, чтобы ваше украшение радовало вас долгие годы.</p>
+        <header>
+            <div class="logo">LUXURY JEWELS</div>
+            <h1 class="main-title fade-in">Почему выбирают нас?</h1>
+            <p class="subtitle fade-in delay-1">Уникальные украшения ручной работы, созданные с любовью и вниманием к каждой детали</p>
+        </header>
+
+        <section class="cards-container">
+            <div class="card quality-card fade-in delay-1">
+                <div class="card-bg"></div>
+                <div class="card-overlay"></div>
+                <div class="card-content">
+                    <div class="card-icon">
+                        <i class="fas fa-gem"></i>
+                    </div>
+                    <h2 class="card-title">Качество и внимание к деталям</h2>
+                    <p class="card-text">Мы тщательно отбираем каждый камень и проверяем каждую деталь, чтобы ваше украшение радовало вас долгие годы.</p>
+                    <a href="#" class="card-btn">Подробнее</a>
+                </div>
             </div>
-        </div>
-        
-        <div class="card card-with-bg exclusive-card">
-            <div class="card-content">
-                <h2 class="card-title">Эксклюзивность</h2>
-                <p class="card-text">Мы создаем ограниченные серии и уникальные изделия.</p>
+            
+            <div class="card exclusive-card fade-in delay-2">
+                <div class="card-bg"></div>
+                <div class="card-overlay"></div>
+                <div class="card-content">
+                    <div class="card-icon">
+                        <i class="fas fa-crown"></i>
+                    </div>
+                    <h2 class="card-title">Эксклюзивность</h2>
+                    <p class="card-text">Мы создаем ограниченные серии и уникальные изделия, которые подчеркивают вашу индивидуальность.</p>
+                    <a href="#" class="card-btn">Подробнее</a>
+                </div>
             </div>
-        </div>
-        
-        <div class="card card-with-bg love-card">
-            <div class="card-content">
-                <h2 class="card-title">Любовь и энергия</h2>
-                <p class="card-text">Каждое изделие рождается в нашей мастерской, наполненное заботой и положительной энергией мастера.</p>
+            
+            <div class="card love-card fade-in delay-3">
+                <div class="card-bg"></div>
+                <div class="card-overlay"></div>
+                <div class="card-content">
+                    <div class="card-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h2 class="card-title">Любовь и энергия</h2>
+                    <p class="card-text">Каждое изделие рождается в нашей мастерской, наполненное заботой и положительной энергией мастера.</p>
+                    <a href="#" class="card-btn">Подробнее</a>
+                </div>
             </div>
-        </div>
+        </section>
+
+        <section class="testimonials">
+            <h2 class="section-title fade-in">Отзывы наших клиентов</h2>
+            <div class="testimonials-container">
+                <div class="testimonial fade-in delay-1">
+                    <p class="testimonial-text">Наконец-то нашла ювелира, который понимает мои пожелания! Кольцо просто волшебное, все подруги спрашивают, где я его приобрела.</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">АК</div>
+                        <div class="author-info">
+                            <h4>Анна К.</h4>
+                            <p>Клиент</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial fade-in delay-2">
+                    <p class="testimonial-text">Заказывал обручальные кольца для нашей свадьбы. Результат превзошел все ожидания! Качество исполнения на высочайшем уровне.</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">МС</div>
+                        <div class="author-info">
+                            <h4>Михаил С.</h4>
+                            <p>Клиент</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial fade-in delay-3">
+                    <p class="testimonial-text">Работаю с этой мастерской уже несколько лет. Всегда уникальные designs и безупречное качество. Рекомендую всем ценителям прекрасного!</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">ОЛ</div>
+                        <div class="author-info">
+                            <h4>Ольга Л.</h4>
+                            <p>Постоянный клиент</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section fade-in">
+            <h2 class="cta-title">Готовы найти свое идеальное украшение?</h2>
+            <p class="cta-text">Свяжитесь с нами для консультации или посетите нашу мастерскую</p>
+            <a href="#" class="cta-btn">Записаться на консультацию</a>
+        </section>
+
+        <footer>
+            <div class="footer-logo">LUXURY JEWELS</div>
+            <div class="footer-links">
+                <a href="#">О нас</a>
+                <a href="#">Каталог</a>
+                <a href="#">Услуги</a>
+                <a href="#">Контакты</a>
+                <a href="#">Доставка и оплата</a>
+            </div>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                <a href="#"><i class="fab fa-vk"></i></a>
+            </div>
+            <p class="copyright">© 2023 Luxury Jewels. Все права защищены.</p>
+        </footer>
     </div>
+
+    <script>
+        // Простая анимация появления элементов при скролле
+        document.addEventListener('DOMContentLoaded', function() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            const fadeInOnScroll = function() {
+                fadeElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const elementVisible = 150;
+                    
+                    if (elementTop < window.innerHeight - elementVisible) {
+                        element.style.opacity = "1";
+                        element.style.transform = "translateY(0)";
+                    }
+                });
+            };
+            
+            // Инициализация
+            fadeElements.forEach(element => {
+                element.style.opacity = "0";
+                element.style.transform = "translateY(30px)";
+                element.style.transition = "opacity 0.8s ease, transform 0.8s ease";
+            });
+            
+            window.addEventListener('scroll', fadeInOnScroll);
+            fadeInOnScroll(); // Проверить при загрузке
+        });
+    </script>
 </body>
 </html>
