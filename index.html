@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Почему мы?</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+        }
+        
+        .main-title {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 45px;
+            margin: 40px 0;
+            color: #ffffff;
+        }
+        
+        .container {
+            display: flex;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            gap: 0;
+        }
+        
+        .card {
+            flex: 1;
+            margin: 0px;
+            padding: 30px;
+            border-radius: 0px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            min-height: 400px;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        /* Стиль для карточки с фоном */
+        .card-with-bg {
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        
+        .card-with-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 1;
+        }
+        
+        .card-title, .card-text {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            margin-bottom: 20px;
+            color: white;
+            
+        }
+        
+        .card-text {
+            font-size: 30px;
+            line-height: 1.4;
+            color: white;
+        }
+         .exclusive-section {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+        
+        .exclusive-title-wrapper {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .exclusive-main-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 45px;
+            margin: 0;
+            color: white;
+        }
+        .exclusive-section.card
+        {
+                
+                padding-top: 90px;
+                min-height: 460px;
+                margin-top: -80px;
+        }
+        
+        /* Конкретные фоны для каждой карточки */
+        .quality-card {
+            background-image: url('https://ir.ozone.ru/s3/multimedia-1-1/wc1000/7217048701.jpg');
+        }
+        
+        .exclusive-card {
+            background-image: url('https://ae04.alicdn.com/kf/H8a836212256e40aeb8d76db46ba0ee08D.jpg');
+        }
+        
+        .love-card {
+            background-image: url('https://ae04.alicdn.com/kf/Sebd761adfdad4f958824adf48bc12679O.jpg');
+        }
+    </style>
+</head>
+<body>
+    
+    
+    
+    <div class="container">
+        <div class="card card-with-bg quality-card">
+            
+            <h2 class="card-title" >Качество и внимание к деталям</h2>
+            
+            <p class="card-text">Мы тщательно отбираем каждый камень и проверяем каждую деталь, чтобы ваше украшение радовало вас долгие годы.</p>
+        </div>
+        
+        <div class="card card-with-bg exclusive-card">
+           
+            <h2 class="card-title">Эксклюзивность</h2>
+            <p class="card-text">Мы создаем ограниченные серии и уникальные изделия.</p>
+        </div>
+        
+        <div class="card card-with-bg love-card">
+            <h2 class="card-title">Любовь и энергия</h2>
+            <p class="card-text">Каждое изделие рождается в нашей мастерской, наполненное заботой и положительной энергией мастера.</p>
+        </div>
+    </div>
+</body>
+</html>
